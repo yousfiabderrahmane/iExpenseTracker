@@ -99,3 +99,18 @@ function init() {
 init();
 
 form.addEventListener("submit", addTransaction);
+
+//fade
+const title = document.getElementById("title");
+const left = document.getElementById("left");
+const right = document.getElementById("right");
+
+setTimeout(() => {
+  title.classList.add("fade");
+}, 500);
+setTimeout(() => {
+  left.classList.add("fade");
+}, 1000);
+setTimeout(() => {
+  right.classList.add("fade");
+}, 1500);
