@@ -257,8 +257,19 @@ input:focus {
   }
   .delete-btn {
     opacity: 1;
-    top: 6px;
-    left: 10px;
+    top: 5px;
+    left: 12px;
+    height: 28px;
     border-radius: 50%;
+    width: 28px;
+  }
+  .list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .list li {
+    width: 80%;
   }
 }
