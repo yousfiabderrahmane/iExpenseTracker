@@ -17,21 +17,27 @@ let transactions =
 function addTransaction(e) {
   e.preventDefault();
 
-  if (text.value.trim() === "" || amount.value.trim() === "") {
-    alert("Please add a text and amount");
+  if (text.value.trim() === "") {
+    alert("Title field is empty");
+  } else if (amount.value.trim() === "") {
+    alert("Value field is empty");
   } else {
     const transaction = {
       id: generateId(),
       text: text.value,
       amount: +amount.value, // + to convert it to a number
     };
-    transactions.push(transaction);
 
-    addTransactionDOM(transaction);
-    updateValues();
-    updateLocalStorage();
-    text.value = "";
-    amount.value = "";
+    if (transactions.filter((e) => e.text === text.value).length < 1) {
+      transactions.push(transaction);
+      addTransactionDOM(transaction);
+      text.value = "";
+      amount.value = "";
+      updateValues();
+      updateLocalStorage();
+    } else {
+      alert("This transaction name already exists");
+    }
   }
 }
 // Generate random id
@@ -61,7 +67,7 @@ function addTransactionDOM(transaction) {
 function updateValues() {
   const amounts = transactions.map((transaction) => transaction.amount);
 
-  const total = amounts.reduce((acc, item) => (acc += item), 0).toFixed(2);
+  const total = amounts.reduce((acc, item) => (acc += item), 0).toFixed(2); //mora lfasila 2 ar9am
 
   const income = amounts
     .filter((item) => item > 0)
@@ -76,19 +82,19 @@ function updateValues() {
   money_plus.innerText = `$${income}`;
   money_minus.innerText = `$${expense}`;
 }
-//Remove transaction by id
 
+//Remove transaction by id
 function removeTransaction(id) {
   transactions = transactions.filter((transaction) => transaction.id !== id);
-
   updateLocalStorage();
-
   init();
 }
+
 //Update local storage transactions
 function updateLocalStorage() {
   localStorage.setItem("transactions", JSON.stringify(transactions));
 }
+
 //Init app
 function init() {
   list.innerHTML = "";
