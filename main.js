@@ -17,8 +17,10 @@ let transactions =
 function addTransaction(e) {
   e.preventDefault();
 
-  if (text.value.trim() === "" || amount.value.trim() === "") {
-    alert("Please enter the title and the amount");
+  if (text.value.trim() === "") {
+    alert("Title field is empty");
+  } else if (amount.value.trim() === "") {
+    alert("Value field is empty");
   } else {
     const transaction = {
       id: generateId(),
